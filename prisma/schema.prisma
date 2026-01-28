@@ -1,0 +1,141 @@
+// AnimePulse Database Schema
+// Based on the analysis document - Section 6
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ==========================================
+// USER & AUTHENTICATION (Better Auth)
+// ==========================================
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  username      String    @unique
+  name          String?
+  emailVerified Boolean   @default(false)
+  image         String?
+  avatarUrl     String?
+  isPublic      Boolean   @default(true)
+  language      String    @default("en")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  sessions   Session[]
+  accounts   Account[]
+  animeLists AnimeList[]
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("sessions")
+}
+
+model Account {
+  id                    String    @id @default(cuid())
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("accounts")
+}
+
+model Verification {
+  id         String   @id @default(cuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verifications")
+}
+
+// ==========================================
+// ANIME LISTS
+// ==========================================
+
+enum ListStatus {
+  WATCHING
+  COMPLETED
+  PLAN_TO_WATCH
+  ON_HOLD
+  DROPPED
+}
+
+model AnimeList {
+  id              String     @id @default(cuid())
+  userId          String
+  animeId         Int        // MAL ID from Jikan API
+  status          ListStatus
+  rating          Int?       // 1-10
+  episodesWatched Int        @default(0)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  // Relations
+  user  User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  anime AnimeCache? @relation(fields: [animeId], references: [malId])
+
+  @@unique([userId, animeId])
+  @@index([userId])
+  @@index([animeId])
+  @@map("anime_lists")
+}
+
+// ==========================================
+// ANIME CACHE (from Jikan API)
+// ==========================================
+
+model AnimeCache {
+  id            Int      @id @default(autoincrement())
+  malId         Int      @unique // MyAnimeList ID
+  title         String
+  titleJapanese String?
+  imageUrl      String
+  synopsis      String?
+  genres        String[] // Array of genre names
+  episodes      Int?
+  status        String?  // "Airing", "Finished Airing", etc.
+  score         Float?
+  year          Int?
+  season        String?
+  streaming     Json?    // JSON array of streaming links
+  cachedAt      DateTime @default(now())
+
+  // Relations
+  animeLists AnimeList[]
+
+  @@map("anime_cache")
+}

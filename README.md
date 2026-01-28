@@ -1,80 +1,36 @@
-# AnimePulse
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Plateforme web pour fans d’anime qui permet de **découvrir des animes**, **gérer ses listes** (Watching/Completed/etc.), **suivre sa progression**, **noter** des séries, et **accéder à des liens de streaming légaux**.
+## Getting Started
 
----
+First, run the development server:
 
-## Équipe — Les Espadas
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-- **Abdul Rahman Zahid** — Scrum Master / Développeur back-end / Développeur front-end  
-- **Lauvens Simon** — Développeur back-end  
-- **Elijah-Mbuyi Tshinyambala** — Développeur back-end  
-- **Adel Tamani** — Développeur back-end  
-- **Diane Devi** — Testeuse / QA  
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-**Cours :** Projet de fin d’études — Technique Informatique  
-**Date :** Janvier 2026  
-**Version :** 1.0  
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
----
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Fonctionnalités (MVP visé)
+## Learn More
 
-- Authentification (email + SSO)
-- Découverte (populaires / tendances)
-- Recherche par titre
-- Filtrage par genre
-- Page détail anime (infos, synopsis, trailer si disponible)
-- Listes : **Watching / Completed / Plan to Watch / On Hold / Dropped**
-- Notation **1 à 10**
-- Progression d’épisodes
-- Profil utilisateur (public/privé)
-- Liens vers plateformes de streaming partenaires
+To learn more about Next.js, take a look at the following resources:
 
-> Certaines fonctionnalités peuvent être ajustées pendant les sprints.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
----
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Tech stack (prévision)
+## Deploy on Vercel
 
-- **Frontend / Fullstack :** Next.js (App Router) + TypeScript
-- **UI :** Tailwind CSS + shadcn/ui
-- **Données anime :** Jikan API (MyAnimeList)
-- **DB :** PostgreSQL (Supabase)
-- **ORM :** Prisma
-- **Validation :** Zod
-- **Auth :** Better Auth (JWT + OAuth Google/Discord)
-- **Déploiement :** Vercel
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-> La stack finale sera confirmée au démarrage officiel.
-
----
-
-## Structure du projet
-
-À venir (le projet n’a pas encore officiellement démarré).
-
----
-
-## Démarrage local
-
-À venir.
-
----
-
-## Tests
-
-À venir.
-
----
-
-## Gestion de projet
-
-- Méthode : Agile / Scrum (sprints)
-- Outils : GitHub Projects (à confirmer)
-
----
-
-## Licence
-
-À venir.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

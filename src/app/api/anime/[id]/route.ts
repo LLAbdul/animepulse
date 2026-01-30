@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAnime } from "@/lib/jikan";
+import { getAnimeById } from "@/lib/jikan/api";
 
 export async function GET(request: NextRequest,{ params }: { params: Promise<{ id: string }> }) {
   try {
@@ -13,7 +13,7 @@ export async function GET(request: NextRequest,{ params }: { params: Promise<{ i
       );
     }
 
-    const anime = await getAnime(malId);
+    const anime = await getAnimeById(malId);
     return NextResponse.json(anime);
   } catch (error) {
     console.error("Error fetching anime:", error);

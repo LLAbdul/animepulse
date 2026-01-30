@@ -17,7 +17,7 @@ model User {
   id            String    @id @default(cuid())
   email         String    @unique
   username      String    @unique
-  displayName   String?
+  displayUsername   String?
   name          String?
   emailVerified Boolean   @default(false)
   image         String?
